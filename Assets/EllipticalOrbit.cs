@@ -26,6 +26,7 @@ public class EllipticalOrbit : MonoBehaviour
     {
         if (Application.isPlaying)
         {
+            CalculateMeanMotion();
             currentTime += Time.deltaTime;
             meanAnomaly = meanMotion * currentTime;
             float eccentricAnomaly = SolveKeplersEquation(meanAnomaly, eccentricity);
@@ -45,13 +46,20 @@ public class EllipticalOrbit : MonoBehaviour
 
     void InitializeOrbit()
     {
-        meanMotion = 2 * Mathf.PI / orbitalPeriod;
+        CalculateMeanMotion();
         if (lineRenderer == null)
         {
             lineRenderer = GetComponent<LineRenderer>();
         }
         lineRenderer.positionCount = resolution;
         focalDistance = semiMajorAxis * eccentricity; 
+    }
+
+    void CalculateMeanMotion()
+    {
+        meanMotion = 2 * Mathf.PI / (orbitalPeriod);
+        CalculateOrbitPath();
+        UpdateOrbitPath();
     }
 
     float SolveKeplersEquation(float M, float e)
@@ -102,6 +110,7 @@ public class EllipticalOrbit : MonoBehaviour
             positions[i] = temp[i];
         }
         positions[positions.Length-1] = positions[0];
-        lineRenderer.SetPositions(positions);
+        if (lineRenderer)
+            lineRenderer.SetPositions(positions);
     }
 }
