@@ -49,7 +49,7 @@ public class EllipticalOrbit : MonoBehaviour
         CalculateMeanMotion();
         if (lineRenderer == null)
         {
-            lineRenderer = GetComponent<LineRenderer>();
+            lineRenderer = GetComponentInChildren<LineRenderer>();
         }
         lineRenderer.positionCount = resolution;
         focalDistance = semiMajorAxis * eccentricity; 
