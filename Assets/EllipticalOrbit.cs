@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class EllipticalOrbit : MonoBehaviour
 {
     public Transform centralBody;
+    public Transform body;
     public float semiMajorAxis = 10f; // a
     public float eccentricity = 0.5f; // e
     public float orbitalPeriod = 5f; // T
@@ -31,8 +32,9 @@ public class EllipticalOrbit : MonoBehaviour
             meanAnomaly = meanMotion * currentTime;
             float eccentricAnomaly = SolveKeplersEquation(meanAnomaly, eccentricity);
             Vector3 position = CalculatePosition(eccentricAnomaly);
-            transform.position = centralBody.position + position;
-            transform.LookAt(centralBody);
+            body.transform.position = centralBody.position + position;
+
+            //body.transform.LookAt(centralBody);
         }
         UpdateOrbitPath();
     }

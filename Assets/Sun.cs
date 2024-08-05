@@ -9,6 +9,6 @@ public class Sun : MonoBehaviour
     void Update()
     {
         if (StateManager.instance.selectedPlanet != null)
-            transform.LookAt(StateManager.instance.selectedPlanet.transform);
+            transform.LookAt(StateManager.instance.selectedPlanet.orbit.body.transform);
     }
 }
