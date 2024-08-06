@@ -39,7 +39,7 @@ public class StateManager : MonoBehaviour
         if (old != null)
             old.cam.enabled = false;
 
-        //planet.cam.enabled = true;
+        planet.cam.enabled = true;
     }
 }
 
