@@ -19,7 +19,7 @@ public class Planet : MonoBehaviour
 
     public void Update()
     {
-        orbit.body.rotation = Quaternion.Euler(rotationAxis);
+        //orbit.body.rotation = Quaternion.Euler(rotationAxis);
 
         /*Debug.Log(rotationAxis);
 
