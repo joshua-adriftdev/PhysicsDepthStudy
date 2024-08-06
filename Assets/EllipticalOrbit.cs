@@ -32,9 +32,9 @@ public class EllipticalOrbit : MonoBehaviour
             float eccentricAnomaly = SolveKeplersEquation(meanAnomaly, eccentricity);
             Vector3 position = CalculatePosition(eccentricAnomaly);
             transform.position = centralBody.position + position;
-            transform.LookAt(centralBody);
+            //transform.LookAt(centralBody);
         }
-        UpdateOrbitPath();
+        //UpdateOrbitPath();
     }
 
     void OnValidate()
@@ -58,8 +58,8 @@ public class EllipticalOrbit : MonoBehaviour
     void CalculateMeanMotion()
     {
         meanMotion = 2 * Mathf.PI / (orbitalPeriod);
-        CalculateOrbitPath();
-        UpdateOrbitPath();
+        //CalculateOrbitPath();
+        //UpdateOrbitPath();
     }
 
     float SolveKeplersEquation(float M, float e)
@@ -84,7 +84,7 @@ public class EllipticalOrbit : MonoBehaviour
     /* 
         Line Renderer
      */
-    void CalculateOrbitPath()
+    public void CalculateOrbitPath()
     {
         orbitPositions.Clear();
         for (int i = 0; i < resolution; i++)
@@ -99,7 +99,7 @@ public class EllipticalOrbit : MonoBehaviour
     /* 
         Line Renderer
      */
-    void UpdateOrbitPath()
+    public void UpdateOrbitPath()
     {
         Vector3[] positions = new Vector3[orbitPositions.ToArray().Length];
 
