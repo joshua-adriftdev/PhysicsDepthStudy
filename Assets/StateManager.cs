@@ -29,30 +29,36 @@ public class StateManager : MonoBehaviour
     public void SetPlanetIndex(int index)
     {
         Planet planet = planets[index];
-        selectedPlanet = planet;
-        OnSelectPlanet(planet, selectedPlanet);
         
+        OnSelectPlanet(planet, selectedPlanet);
+        selectedPlanet = planet;
     }
 
     public void OnSelectPlanet(Planet planet, Planet old)
     {
         if (old != null) { 
             old.cam.enabled = false;
-            old.orbit.resolution = 1000;
+            if (planet == planets[3])
+            {
+                planets[2].lineRenderer.startWidth = 10f;
+            }
+            else
+            {
+                planet.lineRenderer.startWidth = 10f;
+            }
         }
 
         planet.cam.enabled = true;
-        planet.orbit.resolution = 5000;
+        if (planet == planets[3])
+        {
+            planets[2].lineRenderer.startWidth = 0.005f;
+        } else
+        {
+            planet.lineRenderer.startWidth = 0.005f;
+        }
+        //planet.orbit.resolution = 5000;
 
-        Invoke(nameof(UpdateLine), 10);
-    }
-
-    public void UpdateLine()
-    {
-        Debug.Log("Check");
-        selectedPlanet.orbit.resolution = 5002;
-        selectedPlanet.orbit.CalculateOrbitPath();
-        selectedPlanet.orbit.UpdateOrbitPath();
+        //Invoke(nameof(UpdateLine), 10);
     }
 }
 

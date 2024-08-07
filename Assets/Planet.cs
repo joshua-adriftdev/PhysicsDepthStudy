@@ -12,7 +12,7 @@ public class Planet : MonoBehaviour
 
     private void Awake()
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer = GetComponentInChildren<LineRenderer>();
         orbit = GetComponent<EllipticalOrbit>();
         cam = GetComponentInChildren<Camera>();
         cam.enabled = false;
