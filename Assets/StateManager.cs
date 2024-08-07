@@ -21,7 +21,7 @@ public class StateManager : MonoBehaviour
     {
         int timeScale = Mathf.RoundToInt(s);
         Debug.Log("Time Scale: " + timeScale);
-        this.timeScale = timeScale;
+        this.timeScale = Mathf.Pow(10, timeScale);
         Time.timeScale = Mathf.Pow(10, timeScale);
         Debug.Log("Time Scale: " + Mathf.Pow(10, timeScale));
     }
