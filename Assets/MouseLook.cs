@@ -27,12 +27,16 @@ public class MouseLook : MonoBehaviour
 
     void LateUpdate()
     {
+
         if (target && parent)
         {
-            float xSpeed = this.xSpeed / StateManager.instance.timeScale;
-            float ySpeed = this.ySpeed / StateManager.instance.timeScale;
-            x += Input.GetAxis("Mouse X") * xSpeed * Time.deltaTime * sensitivity;
-            y -= Input.GetAxis("Mouse Y") * ySpeed * Time.deltaTime * sensitivity;
+            if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
+            {
+                float xSpeed = this.xSpeed / StateManager.instance.timeScale;
+                float ySpeed = this.ySpeed / StateManager.instance.timeScale;
+                x += Input.GetAxis("Mouse X") * xSpeed * Time.deltaTime * sensitivity;
+                y -= Input.GetAxis("Mouse Y") * ySpeed * Time.deltaTime * sensitivity;
+            }
 
             y = Mathf.Clamp(y, -90, 90);
             Quaternion localRotation = Quaternion.Euler(y, x, 0);

@@ -7,6 +7,7 @@ public class StateManager : MonoBehaviour
 {
     public static StateManager instance;
     public float timeScale = 1f;
+    public float planetScale = 1f;
 
     public Planet[] planets;
     public Planet selectedPlanet = null;
@@ -26,6 +27,14 @@ public class StateManager : MonoBehaviour
         Debug.Log("Time Scale: " + Mathf.Pow(10, timeScale));
     }
 
+    public void UpdateScale(float s)
+    {
+        int scale = Mathf.RoundToInt(s);
+        Debug.Log("Planet Scale: " + scale);
+        this.planetScale = Mathf.Pow(10, scale);
+        Debug.Log("Planet Scale: " + Mathf.Pow(10, scale));
+    }
+
     public void SetPlanetIndex(int index)
     {
         Planet planet = planets[index];
@@ -38,13 +47,13 @@ public class StateManager : MonoBehaviour
     {
         if (old != null) { 
             old.cam.enabled = false;
-            if (planet == planets[3])
+            if (old == planets[3])
             {
                 planets[2].lineRenderer.startWidth = 10f;
             }
             else
             {
-                planet.lineRenderer.startWidth = 10f;
+                old.lineRenderer.startWidth = 10f;
             }
         }
 

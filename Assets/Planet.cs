@@ -5,10 +5,10 @@ public class Planet : MonoBehaviour
     [HideInInspector] public EllipticalOrbit orbit;
     [HideInInspector] public LineRenderer lineRenderer;
     [HideInInspector] public Camera cam;
-    [HideInInspector] public Transform body;
+    public Transform body;
 
-    public float zRotation;
-    public float rotationPeriodInHours;
+    private float initialScale = 1f;
+    private float knownScale = 1f;
 
     private void Awake()
     {
@@ -17,21 +17,16 @@ public class Planet : MonoBehaviour
         cam = GetComponentInChildren<Camera>();
         cam.enabled = false;
         body = GetComponentInChildren<MeshRenderer>().transform;
+        initialScale = body.localScale.x;
     }
 
     private void Update()
     {
-        // Time Scale | 0.1s = 1 day
-        if (rotationPeriodInHours != 0)
+        if (StateManager.instance.planetScale != knownScale)
         {
-            float rotation = 360f / (rotationPeriodInHours / 24) * 0.1f;
-
-            Vector3 v = body.localEulerAngles;
-            v.z = zRotation;
-            v.y += rotation;
-
-            body.localEulerAngles = v;
+            knownScale = StateManager.instance.planetScale;
+            float newScale = initialScale * knownScale;
+            body.localScale = new Vector3(newScale, newScale, newScale);
         }
-        
     }
 }
