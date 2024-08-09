@@ -11,7 +11,8 @@ public class StateManager : MonoBehaviour
 
     public Planet[] planets;
     public Planet selectedPlanet = null;
-    
+
+    public Camera issCamera;
 
     private void Start()
     {
@@ -68,6 +69,13 @@ public class StateManager : MonoBehaviour
         //planet.orbit.resolution = 5000;
 
         //Invoke(nameof(UpdateLine), 10);
+    }
+    
+    public void GoToISS()
+    {
+        Time.timeScale = 0.00001f;
+        //Time.timeScale = 0.05f;
+        issCamera.enabled = true;
     }
 }
 

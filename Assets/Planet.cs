@@ -16,7 +16,8 @@ public class Planet : MonoBehaviour
         orbit = GetComponent<EllipticalOrbit>();
         cam = GetComponentInChildren<Camera>();
         cam.enabled = false;
-        body = GetComponentInChildren<MeshRenderer>().transform;
+        if (body == null)
+            body = GetComponentInChildren<MeshRenderer>().transform;
         initialScale = body.localScale.x;
     }
 

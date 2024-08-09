@@ -51,7 +51,9 @@ public class EllipticalOrbit : MonoBehaviour
         {
             lineRenderer = GetComponentInChildren<LineRenderer>();
         }
-        lineRenderer.positionCount = resolution;
+        if (lineRenderer)
+            lineRenderer.positionCount = resolution;
+
         focalDistance = semiMajorAxis * eccentricity; 
     }
 

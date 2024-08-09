@@ -24,7 +24,8 @@ public class Rotator : MonoBehaviour
                 body = transform;
             }
         }
-        
+
+        UpdateZRotation();
     }
 
     // Update is called once per frame
@@ -34,13 +35,16 @@ public class Rotator : MonoBehaviour
         if (rotationPeriodInHours != 0)
         {
             float rotation = (360f / (rotationPeriodInHours / 24) * 0.1f) * Time.deltaTime;
-            
-            Vector3 v = body.eulerAngles;
-            v.z = zRotation;
-            v.y += rotation;
 
-            body.eulerAngles = v;
+            //body.RotateAround(body.position, Vector3.forward, rotation);
+            body.Rotate(new Vector3(0, rotation, 0), Space.Self);
+            
         }
 
+    }
+
+    void UpdateZRotation()
+    {
+        body.localEulerAngles = new Vector3(body.localEulerAngles.x, body.localEulerAngles.y, zRotation);
     }
 }

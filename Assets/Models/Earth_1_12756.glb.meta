@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: 834a1478fa90aa5458a70f0325e0d751
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Default OBJ
+    second: {fileID: 2100000, guid: 9f39e4621cd3efd4693e99397ae4b797, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -34,10 +39,10 @@ ScriptedImporter:
   _textureCompression: -50
   optimizeGameObjects: 0
   materials:
-  - {instanceID: 0}
+  - {fileID: 4637519048616892231, guid: 834a1478fa90aa5458a70f0325e0d751, type: 3}
   textures:
-  - {instanceID: 0}
-  - {instanceID: 0}
+  - {fileID: -5306097802248511294, guid: 834a1478fa90aa5458a70f0325e0d751, type: 3}
+  - {fileID: -5129283519569365589, guid: 834a1478fa90aa5458a70f0325e0d751, type: 3}
   hasSceneData: 1
   hasAnimationData: 0
   hasMaterialData: 1
@@ -45,10 +50,12 @@ ScriptedImporter:
   animations: []
   _extensions: []
   _textures:
-  - texture: {instanceID: 0}
+  - texture: {fileID: -5306097802248511294, guid: 834a1478fa90aa5458a70f0325e0d751,
+      type: 3}
     shouldBeLinear: 1
     shouldBeNormalMap: 1
-  - texture: {instanceID: 0}
+  - texture: {fileID: -5129283519569365589, guid: 834a1478fa90aa5458a70f0325e0d751,
+      type: 3}
     shouldBeLinear: 0
     shouldBeNormalMap: 0
   _mainAssetIdentifier: scenes/Scene

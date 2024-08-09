@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: b95ec774a52c2194cb4a421bc04a36f0
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SaturnRings
+    second: {fileID: 2100000, guid: 8b7602c0126b9e94690459448513431f, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -34,11 +39,11 @@ ScriptedImporter:
   _textureCompression: -50
   optimizeGameObjects: 0
   materials:
-  - {instanceID: 0}
-  - {instanceID: 0}
+  - {fileID: 7741625113677808684, guid: b95ec774a52c2194cb4a421bc04a36f0, type: 3}
+  - {fileID: -8579661391933908297, guid: b95ec774a52c2194cb4a421bc04a36f0, type: 3}
   textures:
-  - {instanceID: 0}
-  - {instanceID: 0}
+  - {fileID: 5816048644598957874, guid: b95ec774a52c2194cb4a421bc04a36f0, type: 3}
+  - {fileID: 175215140111822792, guid: b95ec774a52c2194cb4a421bc04a36f0, type: 3}
   hasSceneData: 1
   hasAnimationData: 0
   hasMaterialData: 1
@@ -46,10 +51,12 @@ ScriptedImporter:
   animations: []
   _extensions: []
   _textures:
-  - texture: {instanceID: 0}
+  - texture: {fileID: 5816048644598957874, guid: b95ec774a52c2194cb4a421bc04a36f0,
+      type: 3}
     shouldBeLinear: 0
     shouldBeNormalMap: 0
-  - texture: {instanceID: 0}
+  - texture: {fileID: 175215140111822792, guid: b95ec774a52c2194cb4a421bc04a36f0,
+      type: 3}
     shouldBeLinear: 0
     shouldBeNormalMap: 0
   _mainAssetIdentifier: scenes/Scene
