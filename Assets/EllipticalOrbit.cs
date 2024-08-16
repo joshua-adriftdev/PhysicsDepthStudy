@@ -26,15 +26,18 @@ public class EllipticalOrbit : MonoBehaviour
     {
         if (Application.isPlaying)
         {
-            CalculateMeanMotion();
-            currentTime += Time.deltaTime;
+            CalculateMeanMotion(); // re-calculate the fixed mean motion value
+                                   // ensures the orbital path responds to value changes at runtime
+
+            currentTime += Time.deltaTime; // Update time
+
+            // Calculate meanAnomaly based on time
             meanAnomaly = meanMotion * currentTime;
             float eccentricAnomaly = SolveKeplersEquation(meanAnomaly, eccentricity);
+
             Vector3 position = CalculatePosition(eccentricAnomaly);
             transform.position = centralBody.position + position;
-            //transform.LookAt(centralBody);
         }
-        //UpdateOrbitPath();
     }
 
     void OnValidate()
@@ -44,9 +47,10 @@ public class EllipticalOrbit : MonoBehaviour
         UpdateOrbitPath();
     }
 
+    // Setup Line Renderers
     void InitializeOrbit()
     {
-        CalculateMeanMotion();
+        CalculateMeanMotion(); // Calculate the fixed mean motion value
         if (lineRenderer == null)
         {
             lineRenderer = GetComponentInChildren<LineRenderer>();
@@ -54,22 +58,20 @@ public class EllipticalOrbit : MonoBehaviour
         if (lineRenderer)
             lineRenderer.positionCount = resolution;
 
-        focalDistance = semiMajorAxis * eccentricity; 
+        focalDistance = semiMajorAxis * eccentricity; // calculate the focalDistance
     }
 
     void CalculateMeanMotion()
     {
         meanMotion = 2 * Mathf.PI / (orbitalPeriod);
-        //CalculateOrbitPath();
-        //UpdateOrbitPath();
     }
 
-    float SolveKeplersEquation(float M, float e)
+    float SolveKeplersEquation(float m, float e)
     {
-        float E = M; 
+        float E = m; 
         for (int i = 0; i < 5; i++) // 5 iterations Newton-Raphson
         {
-            E = E - (E - e * Mathf.Sin(E) - M) / (1 - e * Mathf.Cos(E));
+            E = E - (E - e * Mathf.Sin(E) - m) / (1 - e * Mathf.Cos(E));
         }
         return E;
     }
@@ -77,21 +79,23 @@ public class EllipticalOrbit : MonoBehaviour
     Vector3 CalculatePosition(float E)
     {
         float a = semiMajorAxis;
-        float b = a * Mathf.Sqrt(1 - eccentricity * eccentricity); // semi-minor axis
+        float b = a * Mathf.Sqrt(1 - eccentricity * eccentricity); // calculate the semi-minor axis
+
         float x = a * Mathf.Cos(E) - focalDistance; // ensures that the sun is at a focal point
         float y = b * Mathf.Sin(E);
-        return new Vector3(x, 0, y);
+        return new Vector3(x, 0, y); // the position in global coordinates
     }
 
     /* 
-        Line Renderer
+        Line Renderer - Uses a resolution to precalculate the orbital path, using X (resolution) points.
+                        This code runs exclusively to render to orbital path in the scene, and does not impact the movement of bodies.
      */
     public void CalculateOrbitPath()
     {
         orbitPositions.Clear();
-        for (int i = 0; i < resolution; i++)
+        for (int i = 0; i < resolution; i++) // 'i' becomes 'time'
         {
-            float M = 2 * Mathf.PI * i / resolution; // mean motion
+            float M = 2 * Mathf.PI * i / resolution; // Calculate mean motion based on the resolution.
             float E = SolveKeplersEquation(M, eccentricity);
             Vector3 position = CalculatePosition(E);
             orbitPositions.Add(position);

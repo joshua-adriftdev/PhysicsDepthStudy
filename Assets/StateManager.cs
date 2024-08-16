@@ -13,6 +13,7 @@ public class StateManager : MonoBehaviour
     public Planet selectedPlanet = null;
 
     public Camera issCamera;
+    public Camera overviewCamera;
 
     private void Start()
     {
@@ -38,19 +39,28 @@ public class StateManager : MonoBehaviour
 
     public void SetPlanetIndex(int index)
     {
-        Planet planet = planets[index];
+        if (index == 0)
+        {
+            selectedPlanet.cam.enabled = false;
+            overviewCamera.enabled = true;
+        } else
+        {
+            Planet planet = planets[index];
+            Debug.Log(index + " | " + planet.gameObject.name);
+            OnSelectPlanet(planet, selectedPlanet);
+            selectedPlanet = planet;
+            overviewCamera.enabled = false;
+        }
         
-        OnSelectPlanet(planet, selectedPlanet);
-        selectedPlanet = planet;
     }
 
     public void OnSelectPlanet(Planet planet, Planet old)
     {
         if (old != null) { 
             old.cam.enabled = false;
-            if (old == planets[3])
+            if (old == planets[4])
             {
-                planets[2].lineRenderer.startWidth = 10f;
+                planets[3].lineRenderer.startWidth = 10f;
             }
             else
             {
@@ -59,9 +69,9 @@ public class StateManager : MonoBehaviour
         }
 
         planet.cam.enabled = true;
-        if (planet == planets[3])
+        if (planet == planets[4])
         {
-            planets[2].lineRenderer.startWidth = 0.005f;
+            planets[3].lineRenderer.startWidth = 0.005f;
         } else
         {
             planet.lineRenderer.startWidth = 0.005f;
